@@ -50,3 +50,30 @@ compile_commands.json
 
 # QtCreator local machine specific files for imported projects
 *creator.user*
+/conaninfo.txt
+/FindBrotli.cmake
+/FindBZip2.cmake
+/Findfdk-aac.cmake
+/Findffmpeg.cmake
+/FindFreetype.cmake
+/FindIconv.cmake
+/FindLibLZMA.cmake
+/Findlibmp3lame.cmake
+/Findlibvpx.cmake
+/Findlibx264.cmake
+/Findlibx265.cmake
+/FindOgg.cmake
+/Findopenh264.cmake
+/FindOpenJPEG.cmake
+/FindOpenSSL.cmake
+/FindOpus.cmake
+/FindPNG.cmake
+/FindVorbis.cmake
+/FindWebP.cmake
+/FindZLIB.cmake
+/graph_info.json
+/conan.lock
+/conan_paths.cmake
+/conanbuildinfo.txt
+
+.idea/

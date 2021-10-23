@@ -1,0 +1,6 @@
+[requires]
+ffmpeg/4.4
+
+[generators]
+cmake_find_package
+cmake_paths
