@@ -27,6 +27,9 @@ endif ()
 find_package(QT NAMES Qt6 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Gui REQUIRED)
+find_package(PkgConfig REQUIRED)
+
+pkg_check_modules(ffmpeg REQUIRED IMPORTED_TARGET libavformat)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -42,8 +45,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     )
 endif()
 
-target_link_libraries(VideoSequencer PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-target_link_libraries(VideoSequencer PRIVATE Qt${QT_VERSION_MAJOR}::Gui)
+target_link_libraries(VideoSequencer PRIVATE
+        Qt${QT_VERSION_MAJOR}::Widgets
+        Qt${QT_VERSION_MAJOR}::Gui
+        PkgConfig::ffmpeg)
 
 set_target_properties(VideoSequencer PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
