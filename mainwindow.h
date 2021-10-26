@@ -17,5 +17,10 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    void dragEnterEvent(QDragEnterEvent *event);
+    void dropEvent(QDropEvent *event);
+
+private slots:
+    void clearList();
 };
 #endif // MAINWINDOW_H

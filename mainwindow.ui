@@ -25,14 +25,21 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="openFilesButton">
+         <property name="text">
+          <string>Open Files</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="convertButton">
          <property name="text">
           <string>Convert</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="clearButton">
          <property name="text">
           <string>Clear</string>
          </property>
