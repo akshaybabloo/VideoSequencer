@@ -12,8 +12,21 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include(conan_paths.cmake)
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
+# CLion setting. This will not work in Windows.
+if ($ENV{CLION_IDE})
+    set(QT_VERSION_MAJOR 6)
+    # Note: This path needs to be update on every new Qt version
+    if (WIN32)
+        # For some reason its not working on Windows. Use Qt Creator to make it runnable.
+        set(CMAKE_PREFIX_PATH "C:/Qt/5.15.2/msvc2019_64")
+    elseif (APPLE)
+        set(CMAKE_PREFIX_PATH /Users/akshayrajgollahalli/Qt/6.2.0/macos)
+    endif ()
+endif ()
+
+find_package(QT NAMES Qt6 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Gui REQUIRED)
 
 set(PROJECT_SOURCES
         main.cpp
