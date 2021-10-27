@@ -2,10 +2,18 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <vector>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+
+template <typename T>
+std::vector <T> range(T N1, T N2) {
+    std::vector<T> numbers(N2-N1);
+    iota(numbers.begin(), numbers.end(), N1);
+    return numbers;
+}
 
 class MainWindow : public QMainWindow
 {
@@ -22,5 +30,6 @@ private:
 
 private slots:
     void clearList();
+    void convert();
 };
 #endif // MAINWINDOW_H

@@ -1,9 +1,11 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include "converter.h"
 #include <QDebug>
 #include <QDragEnterEvent>
 #include <QMimeData>
 #include <QMimeDatabase>
+#include <numeric>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
@@ -11,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     setAcceptDrops(true);
 
     connect(ui->clearButton, &QPushButton::released, this, &MainWindow::clearList);
+    connect(ui->convertButton, &QPushButton::released, this, &MainWindow::convert);
 
 }
 
@@ -38,5 +41,17 @@ MainWindow::~MainWindow() {
 
 void MainWindow::clearList() {
     ui->listWidget->clear();
+}
+
+void MainWindow::convert() {
+    QList<QString> filePaths;
+
+    for (int index : range(0, ui->listWidget->count())) {
+        filePaths.append(ui->listWidget->item(index)->text());
+    }
+
+    auto converter = new Converter(nullptr, &filePaths);
+    converter->convertToFrames();
+
 }
 
