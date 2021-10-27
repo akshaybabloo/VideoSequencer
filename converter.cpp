@@ -8,7 +8,7 @@ extern "C" {
 #include "libavformat/avformat.h"
 }
 
-Converter::Converter(QObject *parent) : QObject(parent) {
+Converter::Converter(QObject *parent, QList<QString> *filePaths) : QObject(parent) {
 
 }
 

@@ -18,7 +18,7 @@ class Converter : public QObject {
     Q_OBJECT
 
 public:
-    explicit Converter(QObject *parent=nullptr);
+    explicit Converter(QObject *parent, QList<QString> *filePaths);
     void loadVideo();
     void convertToFrames();
 
