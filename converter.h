@@ -21,11 +21,13 @@ public:
     explicit Converter(QObject *parent, QList<QString> *filePaths);
     void loadVideo();
     void convertToFrames();
+    virtual ~Converter();
 
 private:
     AVCodecContext *c = nullptr;
     AVFrame *frame = nullptr;
     AVPacket *packet = nullptr;
+    QList<QString> *_filePaths;
 
 
 };
