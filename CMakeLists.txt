@@ -11,6 +11,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include(conan_paths.cmake)
+include(conanbuildinfo.cmake)
 
 # CLion setting. This will not work in Windows.
 if ($ENV{CLION_IDE})
@@ -27,9 +28,9 @@ endif ()
 find_package(QT NAMES Qt6 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Gui REQUIRED)
-find_package(PkgConfig REQUIRED)
-
-pkg_check_modules(ffmpeg REQUIRED IMPORTED_TARGET libavformat)
+#find_package(PkgConfig REQUIRED)
+find_package(ffmpeg COMPONENTS avformat REQUIRED)
+find_package(ffmpeg COMPONENTS avcodec REQUIRED)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -50,7 +51,9 @@ endif()
 target_link_libraries(VideoSequencer PRIVATE
         Qt${QT_VERSION_MAJOR}::Widgets
         Qt${QT_VERSION_MAJOR}::Gui
-        PkgConfig::ffmpeg)
+        ffmpeg::avformat
+        ffmpeg::avcodec
+        )
 
 set_target_properties(VideoSequencer PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
