@@ -46,7 +46,7 @@ void MainWindow::clearList() {
 void MainWindow::convert() {
     QList<QString> filePaths;
 
-    for (int index : range(0, ui->listWidget->count())) {
+    for (int index: range(0, ui->listWidget->count())) {
         filePaths.append(ui->listWidget->item(index)->text());
     }
 

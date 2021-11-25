@@ -19,24 +19,22 @@ if ($ENV{CLION_IDE})
     # Note: This path needs to be update on every new Qt version
     if (WIN32)
         # For some reason its not working on Windows. Use Qt Creator to make it runnable.
-        set(CMAKE_PREFIX_PATH "C:/Qt/5.15.2/msvc2019_64")
+        set(CMAKE_PREFIX_PATH "C:/Qt/6.2.1/msvc2019_64")
     elseif (APPLE)
-        set(CMAKE_PREFIX_PATH /Users/akshayrajgollahalli/Qt/6.2.0/macos)
+        set(CMAKE_PREFIX_PATH /Users/akshayrajgollahalli/Qt/6.2.1/macos)
     endif ()
 endif ()
 
 find_package(QT NAMES Qt6 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Gui REQUIRED)
-#find_package(PkgConfig REQUIRED)
-find_package(ffmpeg COMPONENTS avformat REQUIRED)
-find_package(ffmpeg COMPONENTS avcodec REQUIRED)
+find_package(OpenCV REQUIRED)
+
+include_directories( ${OpenCV_INCLUDE_DIRS} )
 
 set(PROJECT_SOURCES
         main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
+        mainwindow.cpp mainwindow.h mainwindow.ui
 
         converter.cpp converter.h
 )
@@ -51,8 +49,8 @@ endif()
 target_link_libraries(VideoSequencer PRIVATE
         Qt${QT_VERSION_MAJOR}::Widgets
         Qt${QT_VERSION_MAJOR}::Gui
-        ffmpeg::avformat
-        ffmpeg::avcodec
+
+        ${OpenCV_LIBS}
         )
 
 set_target_properties(VideoSequencer PROPERTIES
