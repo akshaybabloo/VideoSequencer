@@ -10,8 +10,8 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-include(conan_paths.cmake)
-include(conanbuildinfo.cmake)
+include(conan/conan_paths.cmake)
+include(conan/conanbuildinfo.cmake)
 
 # CLion setting. This will not work in Windows.
 if ($ENV{CLION_IDE})
