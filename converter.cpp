@@ -19,6 +19,28 @@ Converter::~Converter() {
 
 void Converter::convertToFrames() {
 
-    Vide
+    for (const QString& filePath: *_filePaths) {
+        qDebug() << filePath;
+
+        VideoCapture capture(filePath.toStdString());
+
+        if(!capture.isOpened()) {
+            qDebug() << "unable to open video";
+            return;
+        }
+
+        auto frameCount = capture.get(cv::CAP_PROP_FRAME_COUNT);
+        auto fps = capture.get(cv::CAP_PROP_FPS);
+
+        auto duration = frameCount/fps;
+
+        qDebug()
+                << "fps = " << fps << "\n"
+                << "number of frames = " << frameCount << "\n"
+                << "duration = " << duration;
+
+        capture.release();
+    }
+
 
 }
