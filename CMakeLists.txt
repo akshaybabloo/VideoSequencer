@@ -30,7 +30,7 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Gui REQUIRED)
 find_package(OpenCV REQUIRED)
 
-include_directories( ${OpenCV_INCLUDE_DIRS} )
+include_directories( ${CONAN_INCLUDE_DIRS_OPENCV} )
 
 set(PROJECT_SOURCES
         main.cpp
@@ -50,7 +50,7 @@ target_link_libraries(VideoSequencer PRIVATE
         Qt${QT_VERSION_MAJOR}::Widgets
         Qt${QT_VERSION_MAJOR}::Gui
 
-        ${OpenCV_LIBS}
+        ${CONAN_LIBS_OPENCV}
         )
 
 set_target_properties(VideoSequencer PROPERTIES
