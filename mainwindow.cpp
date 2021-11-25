@@ -12,8 +12,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     setAcceptDrops(true);
 
+    ui->convertButton->setDisabled(true);
+
     connect(ui->clearButton, &QPushButton::released, this, &MainWindow::clearList);
     connect(ui->convertButton, &QPushButton::released, this, &MainWindow::convert);
+
+    connect(ui->listWidget->model(), &QAbstractListModel::rowsInserted, this, &MainWindow::rowsChanged);
+    connect(ui->listWidget->model(), &QAbstractListModel::rowsRemoved, this, &MainWindow::rowsChanged);
 
 }
 
@@ -41,6 +46,7 @@ MainWindow::~MainWindow() {
 
 void MainWindow::clearList() {
     ui->listWidget->clear();
+    ui->convertButton->setDisabled(true);
 }
 
 void MainWindow::convert() {
@@ -53,5 +59,11 @@ void MainWindow::convert() {
     auto converter = new Converter(nullptr, &filePaths);
     converter->convertToFrames();
 
+}
+
+void MainWindow::rowsChanged(const QModelIndex &parent, int first, int last) {
+    if (ui->listWidget->count() > 0) {
+        ui->convertButton->setDisabled(false);
+    }
 }
 
