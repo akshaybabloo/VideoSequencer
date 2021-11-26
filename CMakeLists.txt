@@ -10,8 +10,8 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-include(conan/conan_paths.cmake)
-include(conan/conanbuildinfo.cmake)
+include(conanbuildinfo.cmake)
+conan_basic_setup(TARGETS)
 
 # CLion setting. This will not work in Windows.
 if ($ENV{CLION_IDE})
@@ -19,7 +19,8 @@ if ($ENV{CLION_IDE})
     # Note: This path needs to be update on every new Qt version
     if (WIN32)
         # For some reason its not working on Windows. Use Qt Creator to make it runnable.
-        set(CMAKE_PREFIX_PATH "C:/Qt/6.2.1/msvc2019_64")
+        set(Qt6_DIR "C:/Qt/6.2.1/msvc2019_64/lib/cmake/")
+        set(CMAKE_PREFIX_PATH "C:/Qt/6.2.1/msvc2019_64/lib/cmake")
     elseif (APPLE)
         set(CMAKE_PREFIX_PATH /Users/akshayrajgollahalli/Qt/6.2.1/macos)
     endif ()
@@ -28,9 +29,6 @@ endif ()
 find_package(QT NAMES Qt6 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Gui REQUIRED)
-find_package(OpenCV REQUIRED)
-
-include_directories( ${CONAN_INCLUDE_DIRS_OPENCV} )
 
 set(PROJECT_SOURCES
         main.cpp
@@ -50,7 +48,7 @@ target_link_libraries(VideoSequencer PRIVATE
         Qt${QT_VERSION_MAJOR}::Widgets
         Qt${QT_VERSION_MAJOR}::Gui
 
-        ${CONAN_LIBS_OPENCV}
+        CONAN_PKG::opencv
         )
 
 set_target_properties(VideoSequencer PROPERTIES
