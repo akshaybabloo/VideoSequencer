@@ -50,19 +50,9 @@ compile_commands.json
 
 # QtCreator local machine specific files for imported projects
 *creator.user*
-/conan/*.cmake
-/conan/*.txt
-/conan/*.json
-/conan/*.lock
+/libs/*.cmake
+/libs/*.txt
+/libs/*.json
+/libs/*.lock
 
 .idea/
-
-conanbuildinfo.cmake
-
-conan.lock
-
-conanbuildinfo.txt
-
-conaninfo.txt
-
-graph_info.json
