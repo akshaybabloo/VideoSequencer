@@ -10,8 +10,10 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-include(conanbuildinfo.cmake)
-conan_basic_setup(TARGETS)
+
+include(libs/conan_paths.cmake)
+#include(libs/conanbuildinfo.cmake)
+#conan_basic_setup()
 
 # CLion setting. This will not work in Windows.
 if ($ENV{CLION_IDE})
@@ -29,6 +31,9 @@ endif ()
 find_package(QT NAMES Qt6 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Gui REQUIRED)
+find_package(OpenCV REQUIRED)
+
+include_directories(${OPENCV_INCLUDE_DIRS})
 
 set(PROJECT_SOURCES
         main.cpp
@@ -48,7 +53,7 @@ target_link_libraries(VideoSequencer PRIVATE
         Qt${QT_VERSION_MAJOR}::Widgets
         Qt${QT_VERSION_MAJOR}::Gui
 
-        CONAN_PKG::opencv
+        ${OPENCV_LIBS}
         )
 
 set_target_properties(VideoSequencer PROPERTIES
