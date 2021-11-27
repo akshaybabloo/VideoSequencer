@@ -52,6 +52,7 @@ compile_commands.json
 *creator.user*
 /libs/*.cmake
 /libs/*.txt
+!/libs/conanfile.txt
 /libs/*.json
 /libs/*.lock
 
