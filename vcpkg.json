@@ -2,6 +2,19 @@
   "name": "videosequencer",
   "version": "1.0.0",
   "dependencies": [
-    "opencv"
+    "opencv",
+    {
+      "name": "opencv4",
+      "features": [
+        "dnn",
+        "ffmpeg",
+        "jpeg",
+        "opengl",
+        "openmp",
+        "png",
+        "tiff",
+        "webp"
+      ]
+    }
   ]
 }

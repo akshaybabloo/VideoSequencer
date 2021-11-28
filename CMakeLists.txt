@@ -1,11 +1,6 @@
+set( CMAKE_TOOLCHAIN_FILE "C:/Users/em8273/vcpkg/scripts/buildsystems/vcpkg.cmake" )
 cmake_minimum_required(VERSION 3.5)
 
-
-if (WIN32)
-    set(VCPKG_DEFAULT_TRIPLET "x64-windows")
-endif ()
-
-message(" ehllo $ENV{HOME}")
 
 project(VideoSequencer VERSION 0.1 LANGUAGES CXX)
 
@@ -31,9 +26,22 @@ if ($ENV{CLION_IDE})
     endif ()
 endif ()
 
+message("${CMAKE_CURRENT_BINARY_DIR}")
+
+set(OpenCV_DIR "cmake-build-debug/vcpkg_installed/x64-windows/share/opencv")
+
 find_package(QT NAMES Qt6 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Gui REQUIRED)
+find_package(OpenCV CONFIG REQUIRED)
+
+if( OpenCV_FOUND )
+    # Additional Include Directories
+    include_directories( ${OpenCV_INCLUDE_DIRS} )
+
+    # Additional Library Directories
+    link_directories( ${OpenCV_LIB_DIR} )
+endif()
 
 set(PROJECT_SOURCES
         main.cpp
@@ -52,6 +60,8 @@ endif()
 target_link_libraries(VideoSequencer PRIVATE
         Qt${QT_VERSION_MAJOR}::Widgets
         Qt${QT_VERSION_MAJOR}::Gui
+
+        ${OpenCV_LIBS}
         )
 
 set_target_properties(VideoSequencer PROPERTIES
