@@ -1,4 +1,3 @@
-set( CMAKE_TOOLCHAIN_FILE "C:/Users/em8273/vcpkg/scripts/buildsystems/vcpkg.cmake" )
 cmake_minimum_required(VERSION 3.5)
 
 project(VideoSequencer VERSION 0.1 LANGUAGES CXX)
@@ -12,8 +11,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include(libs/conan_paths.cmake)
-include(libs/conanbuildinfo.cmake)
+include(${CMAKE_CURRENT_BINARY_DIR}/conan_paths.cmake)
+include(${CMAKE_CURRENT_BINARY_DIR}/conanbuildinfo.cmake)
 #conan_basic_setup()
 
 # CLion setting. This will not work in Windows.
@@ -30,8 +29,6 @@ if ($ENV{CLION_IDE})
 endif ()
 
 message("${CMAKE_CURRENT_BINARY_DIR}")
-
-set(OpenCV_DIR "cmake-build-debug/vcpkg_installed/x64-windows/share/opencv")
 
 find_package(QT NAMES Qt6 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
