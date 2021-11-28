@@ -57,4 +57,3 @@ compile_commands.json
 /libs/*.lock
 
 .idea/
-/vcpkg_installed/
