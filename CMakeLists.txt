@@ -40,11 +40,17 @@ message("OpenCV ${opencv_LIBRARIES}")
 
 include_directories(${opencv_INCLUDE_DIRS})
 
+if (WIN32)
+    set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/win.rc")
+endif ()
+
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp mainwindow.h mainwindow.ui
 
         converter.cpp converter.h
+
+        assets.qrc
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
