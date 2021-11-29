@@ -35,10 +35,12 @@ find_package(QT NAMES Qt6 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Gui REQUIRED)
 find_package(OpenCV REQUIRED)
+find_package(boost REQUIRED COMPONENTS range)
 
-message("OpenCV ${opencv_LIBRARIES}")
+message("OpenCV ${Boost_LIBRARIES}")
 
 include_directories(${opencv_INCLUDE_DIRS})
+include_directories(${Boost_INCLUDE_DIRS})
 
 if (WIN32)
     set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/win.rc")
@@ -65,6 +67,7 @@ target_link_libraries(VideoSequencer PRIVATE
         Qt${QT_VERSION_MAJOR}::Gui
 
         ${opencv_LIBRARIES}
+        ${Boost_LIBRARIES}
         )
 
 set_target_properties(VideoSequencer PROPERTIES
