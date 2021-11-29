@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 
+#set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_BINARY_DIR}/conan_toolchain.cmake")
+
 project(VideoSequencer VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -8,12 +10,12 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(${CMAKE_CURRENT_BINARY_DIR}/conan_paths.cmake)
-include(${CMAKE_CURRENT_BINARY_DIR}/conanbuildinfo.cmake)
-#conan_basic_setup()
+#include(${CMAKE_CURRENT_BINARY_DIR}/conanbuildinfo.cmake)
+#conan_basic_setup(TARGETS)
 
 # CLion setting. This will not work in Windows.
 if ($ENV{CLION_IDE})
@@ -35,7 +37,9 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Gui REQUIRED)
 find_package(OpenCV REQUIRED)
 
-include_directories(${CONAN_INCLUDE_DIRS_OPENCV})
+message("OpenCV ${opencv_LIBRARIES}")
+
+include_directories(${opencv_INCLUDE_DIRS})
 
 set(PROJECT_SOURCES
         main.cpp
@@ -55,7 +59,7 @@ target_link_libraries(VideoSequencer PRIVATE
         Qt${QT_VERSION_MAJOR}::Widgets
         Qt${QT_VERSION_MAJOR}::Gui
 
-        ${CONAN_LIBS_OPENCV}
+        ${opencv_LIBRARIES}
         )
 
 set_target_properties(VideoSequencer PROPERTIES
