@@ -51,8 +51,8 @@ set(PROJECT_SOURCES
         ${APP_ICON_RESOURCE_WINDOWS}
 
         mainwindow.cpp mainwindow.h mainwindow.ui
-
         converter.cpp converter.h
+        imagewriter.cpp imagewriter.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
