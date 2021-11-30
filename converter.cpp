@@ -50,7 +50,8 @@ void Converter::convertToFrames() {
             capture.set(cv::CAP_PROP_POS_FRAMES, index);
             capture >> frame;
             qDebug() << frame.data;
-            imwrite(QString("test%d").arg(index).toStdString(), frame);
+            imwrite(QString("test%1.png").arg(index).toStdString(), frame);
+            qDebug() << QString("test%1.png").arg(index);
         }
 
         capture.release();
