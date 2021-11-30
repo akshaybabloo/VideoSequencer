@@ -33,5 +33,7 @@ private slots:
     void clearList();
     void convert();
     void rowsChanged(const QModelIndex &parent, int first, int last);
+    void exitApplication(bool checked);
+
 };
 #endif // MAINWINDOW_H
