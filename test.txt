@@ -1,0 +1,81 @@
+cmake_minimum_required(VERSION 3.5)
+
+#set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_BINARY_DIR}/conan_toolchain.cmake")
+
+project(VideoSequencer VERSION 0.1 LANGUAGES CXX)
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+include(${CMAKE_CURRENT_BINARY_DIR}/conan_paths.cmake)
+#include(${CMAKE_CURRENT_BINARY_DIR}/conanbuildinfo.cmake)
+#conan_basic_setup(TARGETS)
+
+# CLion setting. This will not work in Windows.
+if ($ENV{CLION_IDE})
+    set(QT_VERSION_MAJOR 6)
+    # Note: This path needs to be update on every new Qt version
+    if (WIN32)
+        # For some reason its not working on Windows. Use Qt Creator to make it runnable.
+        set(CMAKE_PREFIX_PATH "C:/Qt/6.2.1/msvc2019_64/")
+    elseif (APPLE)
+        set(CMAKE_PREFIX_PATH /Users/akshayrajgollahalli/Qt/6.2.1/macos)
+    endif ()
+endif ()
+
+message("${CMAKE_CURRENT_BINARY_DIR}")
+
+find_package(QT NAMES Qt6 COMPONENTS Widgets REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Gui REQUIRED)
+find_package(OpenCV REQUIRED)
+find_package(boost REQUIRED COMPONENTS range)
+
+message("OpenCV ${Boost_LIBRARIES}")
+
+include_directories(${opencv_INCLUDE_DIRS})
+include_directories(${Boost_INCLUDE_DIRS})
+
+if (WIN32)
+    set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/win.rc")
+endif ()
+
+set(PROJECT_SOURCES
+        main.cpp
+        mainwindow.cpp mainwindow.h mainwindow.ui
+
+        converter.cpp converter.h
+
+        assets.qrc
+)
+
+if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
+    qt_add_executable(VideoSequencer
+        MANUAL_FINALIZATION
+        ${PROJECT_SOURCES}
+    )
+endif()
+
+target_link_libraries(VideoSequencer PRIVATE
+        Qt${QT_VERSION_MAJOR}::Widgets
+        Qt${QT_VERSION_MAJOR}::Gui
+
+        ${opencv_LIBRARIES}
+        ${Boost_LIBRARIES}
+        )
+
+set_target_properties(VideoSequencer PROPERTIES
+    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
+    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+)
+
+if(QT_VERSION_MAJOR EQUAL 6)
+    qt_finalize_executable(VideoSequencer)
+endif()
