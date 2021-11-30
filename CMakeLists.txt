@@ -30,11 +30,7 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Gui REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(boost REQUIRED COMPONENTS range)
-
-#message("OpenCV ${opencv_LIBS}")
-
-#include_directories(${opencv_INCLUDE_DIRS})
-#include_directories(${Boost_INCLUDE_DIRS})
+find_package(ffmpeg REQUIRED COMPONENTS avcodec avformat)
 
 if (WIN32)
     set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/win.rc")
@@ -56,8 +52,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     )
 endif()
 
-message("boost ${Boost_COMPONENTS_ALL}")
-
 target_link_libraries(VideoSequencer PRIVATE
         Qt${QT_VERSION_MAJOR}::Widgets
         Qt${QT_VERSION_MAJOR}::Gui
@@ -65,6 +59,10 @@ target_link_libraries(VideoSequencer PRIVATE
         Boost::boost
         opencv::core
         opencv::videoio
+        opencv::video
+        opencv::imgcodecs
+        ffmpeg::avcodec
+        ffmpeg::avformat
         )
 
 set_target_properties(VideoSequencer PROPERTIES
