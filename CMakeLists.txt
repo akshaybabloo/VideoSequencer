@@ -32,17 +32,27 @@ find_package(OpenCV REQUIRED)
 find_package(boost REQUIRED COMPONENTS range)
 find_package(ffmpeg REQUIRED COMPONENTS avcodec avformat)
 
+if (APPLE)
+    set(MACOS_BUNDLE_ICON_FILE logo.icns)
+    set(app_icon_macos "assets/logo/logo.icns")
+    set_source_files_properties(${app_icon_macos} PROPERTIES MACOS_PACKAGE_LOCATION "Resources")
+endif ()
+
 if (WIN32)
     set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/win.rc")
 endif ()
 
 set(PROJECT_SOURCES
         main.cpp
+
+        assets.qrc
+
+        ${app_icon_macos}
+        ${APP_ICON_RESOURCE_WINDOWS}
+
         mainwindow.cpp mainwindow.h mainwindow.ui
 
         converter.cpp converter.h
-
-        assets.qrc
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -51,6 +61,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
     )
 endif()
+
+if (APPLE)
+    set_property(TARGET VideoSequencer PROPERTY MACOSX_BUNDLE_INFO_PLAYLIST "${CMAKE_CURRENT_SOURCE_DIR}/Info.plist")
+endif ()
 
 target_link_libraries(VideoSequencer PRIVATE
         Qt${QT_VERSION_MAJOR}::Widgets
