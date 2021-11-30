@@ -3,5 +3,5 @@ opencv/4.5.3
 boost/1.77.0
 
 [generators]
-cmake_find_package
-cmake_paths
+CMakeToolchain
+cmake_find_package_multi
