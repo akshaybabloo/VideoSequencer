@@ -29,7 +29,7 @@ find_package(QT NAMES Qt6 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Gui REQUIRED)
 find_package(OpenCV REQUIRED)
-find_package(boost REQUIRED COMPONENTS range)
+find_package(Boost REQUIRED COMPONENTS boost)
 find_package(ffmpeg REQUIRED COMPONENTS avcodec avformat)
 
 if (APPLE)
@@ -71,12 +71,10 @@ target_link_libraries(VideoSequencer PRIVATE
         Qt${QT_VERSION_MAJOR}::Gui
 
         Boost::boost
-        opencv::core
-        opencv::videoio
-        opencv::video
-        opencv::imgcodecs
-        ffmpeg::avcodec
-        ffmpeg::avformat
+        opencv_core
+        opencv_videoio
+        opencv_video
+        opencv_imgcodecs
         )
 
 set_target_properties(VideoSequencer PROPERTIES
