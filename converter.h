@@ -7,6 +7,7 @@
 
 #include <QObject>
 #include <opencv2/opencv.hpp>
+#include "imagedata.h"
 
 using namespace cv;
 
@@ -17,7 +18,7 @@ Q_OBJECT
 public:
     explicit Converter(QObject *parent, QList<QString> *filePaths);
     void loadVideo();
-    void convertToFrames();
+    QList<ImageData *> convertToFrames();
     virtual ~Converter();
 
 private:

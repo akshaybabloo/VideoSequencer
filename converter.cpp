@@ -3,6 +3,7 @@
 //
 
 #include "converter.h"
+#include "imagedata.h"
 #include <QDebug>
 #include <QMessageBox>
 #include <boost/range/irange.hpp>
@@ -19,7 +20,8 @@ Converter::~Converter() {
     delete _filePaths;
 }
 
-void Converter::convertToFrames() {
+QList<ImageData *> Converter::convertToFrames() {
+    QList<ImageData*> imageData;
 
     for (const QString& filePath: *_filePaths) {
         qDebug() << filePath;
@@ -30,7 +32,7 @@ void Converter::convertToFrames() {
 
         if(!capture.isOpened()) {
             qDebug() << "unable to open video";
-            return;
+            return imageData;
         }
 
         int frameCount = int(capture.get(cv::CAP_PROP_FRAME_COUNT));
@@ -49,13 +51,20 @@ void Converter::convertToFrames() {
         for (int index : frameIndexes) {
             capture.set(cv::CAP_PROP_POS_FRAMES, index);
             capture >> frame;
-            qDebug() << frame.data;
-            imwrite(QString("test%1.png").arg(index).toStdString(), frame);
-            qDebug() << QString("test%1.png").arg(index);
+
+            auto data = new ImageData(nullptr);
+            data->setFrame(frame);
+            data->setDuration(QString(""));
+
+            imageData.append(data);
+//            qDebug() << frame.data;
+//            imwrite(QString("test%1.png").arg(index).toStdString(), frame);
+//            qDebug() << QString("test%1.png").arg(index);
         }
 
         capture.release();
     }
 
+    return imageData;
 
 }
