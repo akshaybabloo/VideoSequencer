@@ -52,7 +52,7 @@ set(PROJECT_SOURCES
 
         mainwindow.cpp mainwindow.h mainwindow.ui
         converter.cpp converter.h
-        imagewriter.cpp imagewriter.h
+        imageformatter.cpp imageformatter.h
         imagedata.h imagedata.cpp
 )
 
