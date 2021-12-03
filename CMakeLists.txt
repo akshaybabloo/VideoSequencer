@@ -19,9 +19,9 @@ if ($ENV{CLION_IDE})
     # Note: This path needs to be update on every new Qt version
     if (WIN32)
         # For some reason its not working on Windows. Use Qt Creator to make it runnable.
-        list(APPEND CMAKE_PREFIX_PATH "C:/Qt/6.2.1/msvc2019_64/")
+        list(APPEND CMAKE_PREFIX_PATH "C:/Qt/6.2.2/msvc2019_64/")
     elseif (APPLE)
-        list(APPEND CMAKE_PREFIX_PATH /Users/akshayrajgollahalli/Qt/6.2.1/macos)
+        list(APPEND CMAKE_PREFIX_PATH /Users/akshayrajgollahalli/Qt/6.2.2/macos)
     endif ()
 endif ()
 
