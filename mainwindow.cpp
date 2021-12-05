@@ -51,10 +51,10 @@ void MainWindow::clearList() {
 }
 
 void MainWindow::convert() {
-    QList<QString> filePaths;
+    QFileInfoList filePaths;
 
     for (int index: range(0, ui->listWidget->count())) {
-        filePaths.append(ui->listWidget->item(index)->text());
+        filePaths.append(QFileInfo(ui->listWidget->item(index)->text()));
     }
 
     auto converter = new Converter(nullptr, &filePaths);

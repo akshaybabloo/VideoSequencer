@@ -6,10 +6,11 @@
 #include "imagedata.h"
 #include <QDebug>
 #include <QMessageBox>
+#include <QFileInfo>
 #include <boost/range/irange.hpp>
 #include <boost/range/algorithm_ext/push_back.hpp>
 
-Converter::Converter(QObject *parent, QList<QString> *filePaths) : QObject(parent) {
+Converter::Converter(QObject *parent, QFileInfoList *filePaths) : QObject(parent) {
     _filePaths = filePaths;
 }
 
@@ -23,12 +24,12 @@ Converter::~Converter() {
 QList<ImageData *> Converter::convertToFrames() {
     QList<ImageData*> imageData;
 
-    for (const QString& filePath: *_filePaths) {
+    for (const QFileInfo & filePath: *_filePaths) {
         qDebug() << filePath;
         std::vector<int> frameIndexes;
         Mat frame;
 
-        VideoCapture capture(filePath.toStdString());
+        VideoCapture capture(filePath.filePath().toStdString());
 
         if(!capture.isOpened()) {
             qDebug() << "unable to open video";
