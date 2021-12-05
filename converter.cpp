@@ -37,7 +37,7 @@ QList<ImageData *> Converter::convertToFrames() {
 
         int frameCount = int(capture.get(cv::CAP_PROP_FRAME_COUNT));
         auto fps = capture.get(cv::CAP_PROP_FPS);
-        auto duration = frameCount/fps;
+        auto durationMinutes = QString::number((frameCount/fps)/60.0);
         int nthFrame = int((frameCount-10)/10);
 
         boost::push_back(frameIndexes, boost::irange(1, frameCount, nthFrame));
@@ -45,7 +45,7 @@ QList<ImageData *> Converter::convertToFrames() {
         qDebug()
                 << "fps = " << fps << "\n"
                 << "number of frames = " << frameCount << "\n"
-                << "duration = " << duration
+                << "duration = " << durationMinutes
                 << "frames = " << frameIndexes;
 
         for (int index : frameIndexes) {
