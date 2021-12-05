@@ -17,12 +17,18 @@ public:
     explicit ImageData(QObject *parent);
     const Mat &getFrame() const;
     void setFrame(const Mat &frame);
-    const QString &getDuration() const;
-    void setDuration(const QString &duration);
+    const QString &getFrameDuration() const;
+    void setFrameDuration(const QString &duration);
+    const QString &getFileName() const;
+    void setFileName(const QString &fileName);
+    const QString &getVideoDuration() const;
+    void setVideoDuration(const QString &videoDuration);
 
 private:
     Mat _frame;
-    QString _duration;
+    QString _frameDuration;
+    QString _fileName;
+    QString _videoDuration;
 
 };
 

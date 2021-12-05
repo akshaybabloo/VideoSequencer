@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include "converter.h"
+#include "imageformatter.h"
 #include <QDebug>
 #include <QDragEnterEvent>
 #include <QMimeData>
@@ -58,7 +59,14 @@ void MainWindow::convert() {
     }
 
     auto converter = new Converter(nullptr, &filePaths);
-    converter->convertToFrames();
+    auto frames = converter->convertToFrames();
+
+    auto imageFormatter = new ImageFormatter(nullptr);
+    for (const auto &frame : frames){
+        frame->getFrame().data;
+    }
+
+
 
 }
 

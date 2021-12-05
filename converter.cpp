@@ -55,7 +55,9 @@ QList<ImageData *> Converter::convertToFrames() {
 
             auto data = new ImageData(nullptr);
             data->setFrame(frame);
-            data->setDuration(QString(""));
+            data->setFrameDuration(QString(""));
+            data->setVideoDuration(durationMinutes);
+            data->setFileName(filePath.fileName());
 
             imageData.append(data);
 //            qDebug() << frame.data;

@@ -13,6 +13,9 @@ Q_OBJECT
 
 public:
     explicit ImageFormatter(QObject *parent);
+
+    void addDurationToImage();
+    void imageCollage();
 };
 
 

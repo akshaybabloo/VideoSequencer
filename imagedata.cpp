@@ -17,10 +17,26 @@ void ImageData::setFrame(const Mat &frame) {
     this->_frame = frame;
 }
 
-const QString &ImageData::getDuration() const {
-    return _duration;
+const QString &ImageData::getFrameDuration() const {
+    return _frameDuration;
 }
 
-void ImageData::setDuration(const QString &duration) {
-    this->_duration = duration;
+void ImageData::setFrameDuration(const QString &duration) {
+    this->_frameDuration = duration;
+}
+
+const QString &ImageData::getFileName() const {
+    return _fileName;
+}
+
+void ImageData::setFileName(const QString &fileName) {
+    _fileName = fileName;
+}
+
+const QString &ImageData::getVideoDuration() const {
+    return _videoDuration;
+}
+
+void ImageData::setVideoDuration(const QString &videoDuration) {
+    _videoDuration = videoDuration;
 }
