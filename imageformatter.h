@@ -7,6 +7,7 @@
 
 
 #include <QObject>
+#include "imagedata.h"
 
 class ImageFormatter : public QObject {
 Q_OBJECT
@@ -14,8 +15,7 @@ Q_OBJECT
 public:
     explicit ImageFormatter(QObject *parent);
 
-    void addDurationToImage();
-    void imageCollage();
+    QImage createImageCollage(ImageData *imageData);
 };
 
 

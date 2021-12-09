@@ -7,3 +7,7 @@
 ImageFormatter::ImageFormatter(QObject *parent) : QObject(parent) {
 
 }
+
+QImage ImageFormatter::createImageCollage(ImageData *imageData) {
+
+}
