@@ -48,22 +48,18 @@ QList<ImageData *> Converter::convertToFrames() {
                 << "number of frames = " << frameCount << "\n"
                 << "duration = " << durationMinutes
                 << "frames = " << frameIndexes;
-
+        auto data = new ImageData(nullptr);
+        data->setFrameDuration(QString(""));
+        data->setVideoDuration(durationMinutes);
+        data->setFileName(filePath.fileName());
         for (int index : frameIndexes) {
             capture.set(cv::CAP_PROP_POS_FRAMES, index);
             capture >> frame;
 
-            auto data = new ImageData(nullptr);
-            data->setFrame(frame);
-            data->setFrameDuration(QString(""));
-            data->setVideoDuration(durationMinutes);
-            data->setFileName(filePath.fileName());
+            data->appendFrame(frame);
 
-            imageData.append(data);
-//            qDebug() << frame.data;
-//            imwrite(QString("test%1.png").arg(index).toStdString(), frame);
-//            qDebug() << QString("test%1.png").arg(index);
         }
+        imageData.append(data);
 
         capture.release();
     }
