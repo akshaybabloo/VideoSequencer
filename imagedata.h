@@ -15,8 +15,8 @@ class ImageData : public QObject {
 Q_OBJECT
 public:
     explicit ImageData(QObject *parent);
-    const Mat &getFrame() const;
-    void setFrame(const Mat &frame);
+    const QList<Mat> &getFrames() const;
+    void appendFrame(const Mat &frame);
     const QString &getFrameDuration() const;
     void setFrameDuration(const QString &duration);
     const QString &getFileName() const;
@@ -25,7 +25,7 @@ public:
     void setVideoDuration(const QString &videoDuration);
 
 private:
-    Mat _frame;
+    QList<Mat> _frame;
     QString _frameDuration;
     QString _fileName;
     QString _videoDuration;

@@ -9,12 +9,12 @@ ImageData::ImageData(QObject *parent) : QObject(parent) {
 
 }
 
-const Mat &ImageData::getFrame() const {
+const QList<Mat> &ImageData::getFrames() const {
     return _frame;
 }
 
-void ImageData::setFrame(const Mat &frame) {
-    this->_frame = frame;
+void ImageData::appendFrame(const Mat &frame) {
+    this->_frame.append(frame);
 }
 
 const QString &ImageData::getFrameDuration() const {
