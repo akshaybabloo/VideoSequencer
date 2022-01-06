@@ -63,7 +63,7 @@ void MainWindow::convert() {
 
     auto imageFormatter = new ImageFormatter(nullptr);
     for (const auto &frame : frames){
-        auto collague = imageFormatter->createImageCollage(frame);
+        auto collage = imageFormatter->createImageCollage(frame);
     }
 
 
