@@ -56,7 +56,7 @@ QList<ImageData *> Converter::convertToFrames() {
             capture.set(cv::CAP_PROP_POS_FRAMES, index);
             capture >> frame;
 
-            data->appendFrame(frame);
+            data->appendFrame(QImage(frame.data, frame.cols, frame.rows, frame.step, QImage::Format_RGB888));
 
         }
         imageData.append(data);

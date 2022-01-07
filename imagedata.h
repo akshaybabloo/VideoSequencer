@@ -10,13 +10,14 @@
 using namespace cv;
 
 #include <QObject>
+#include <QImage>
 
 class ImageData : public QObject {
 Q_OBJECT
 public:
     explicit ImageData(QObject *parent);
-    const QList<Mat> &getFrames() const;
-    void appendFrame(const Mat &frame);
+    const QList<QImage> &getFrames() const;
+    void appendFrame(const QImage &frame);
     const QString &getFrameDuration() const;
     void setFrameDuration(const QString &duration);
     const QString &getFileName() const;
@@ -25,7 +26,7 @@ public:
     void setVideoDuration(const QString &videoDuration);
 
 private:
-    QList<Mat> _frame;
+    QList<QImage> _frame;
     QString _frameDuration;
     QString _fileName;
     QString _videoDuration;
