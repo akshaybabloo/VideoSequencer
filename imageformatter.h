@@ -16,6 +16,9 @@ public:
     explicit ImageFormatter(QObject *parent);
 
     QImage createImageCollage(ImageData *imageData);
+
+private:
+    static QImage scaled(const QImage &image);
 };
 
 
