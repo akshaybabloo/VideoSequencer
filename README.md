@@ -24,5 +24,5 @@ conan install . -if=cmake-build-debug -pr=default -c tools.cmake.cmaketoolchain:
 Open an external Terminal app and change the directory to the current project folder so that `conanfil.txt` is in the root and type in the following:
 
 ```shell
-conan install . -pr:b=default -if=<path to build folder> -c tools.cmake.cmaketoolchain:generator="Ninja"
+conan install . -pr:b=default -if=<path to build folder> -c tools.cmake.cmaketoolchain:generator="Ninja cmake" -s build_type=Debug
 ```
