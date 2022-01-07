@@ -16,13 +16,13 @@ class ImageData : public QObject {
 Q_OBJECT
 public:
     explicit ImageData(QObject *parent);
-    const QList<QImage> &getFrames() const;
+    [[nodiscard]] const QList<QImage> &getFrames() const;
     void appendFrame(const QImage &frame);
-    const QString &getFrameDuration() const;
+    [[nodiscard]] const QString &getFrameDuration() const;
     void setFrameDuration(const QString &duration);
-    const QString &getFileName() const;
+    [[nodiscard]] const QString &getFileName() const;
     void setFileName(const QString &fileName);
-    const QString &getVideoDuration() const;
+    [[nodiscard]] const QString &getVideoDuration() const;
     void setVideoDuration(const QString &videoDuration);
 
 private:
